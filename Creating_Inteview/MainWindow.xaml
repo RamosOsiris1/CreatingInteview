@@ -1,0 +1,13 @@
+﻿<Window x:Class="Creating_Inteview.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Creating_Inteview"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="265">
+    <Grid Width="251">
+        <Button Content="Создать опрос" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="100" Width="100" Click="Button_Click" Margin="10,0,0,0" />
+        <Button Content="Пройти опрос" HorizontalAlignment="Left" VerticalAlignment="Center" Height="100" Width="100" Click="Button_Click_1" Margin="140,0,0,0"  />
+    </Grid>
+</Window>

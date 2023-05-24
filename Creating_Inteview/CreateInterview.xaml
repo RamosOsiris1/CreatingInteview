@@ -1,0 +1,36 @@
+﻿<Window x:Class="Creating_Inteview.CreateInterview"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Creating_Inteview" xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="CreateInterview" Height="768" Width="1024" Background="white" ResizeMode="NoResize">
+    <Grid>
+        
+        <Menu Height="Auto" VerticalAlignment="Top" Panel.ZIndex="1" Margin="0,0,0,0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый опрос" Click="NewInterview_Button_Click"/>
+                <MenuItem Header="Открыть опрос" Click="OpenInterview_Button_Click"/>
+                <Separator />
+                <MenuItem Header="Сохранить" Click="SaveInterview_Button_Click"/>
+                <Separator />
+                <MenuItem Header="Выйти" Click="ExitApp_Button_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        
+        <ScrollViewer Margin="0,10,0,0" Panel.ZIndex="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="256*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="256*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Width="505" x:Name="InterviewBody">
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+    
+</Window>

@@ -1,0 +1,359 @@
+﻿<Application x:Class="Creating_Inteview.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Creating_Inteview"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="MyWaterMarkStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="White" BorderBrush="#FF7D8683" BorderThickness="0,0,0,1"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
+                            <Label Margin="2,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontFamily="Cambria"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="IBeam"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="450"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Margin" Value="25,5,0,0"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+        </Style>
+        <Style x:Key="QuestionBody" TargetType="Border">
+            <Setter Property="Background" Value="white"></Setter>
+            <Setter Property="BorderThickness" Value="1,1,1,1"></Setter>
+            <Setter Property="BorderBrush" Value="#FFABADB3"></Setter>
+            <Setter Property="Margin" Value="0,20,0,0"></Setter>
+            <Setter Property="CornerRadius" Value="2,2,2,2"></Setter>
+        </Style>
+        <Style x:Key="TitleBlock" TargetType="Border">
+            <Setter Property="Background" Value="white"></Setter>
+            <Setter Property="BorderThickness" Value="1,1,1,1"></Setter>
+            <Setter Property="BorderBrush" Value="#FFABADB3"></Setter>
+            <Setter Property="Margin" Value="0,10,0,0"></Setter>
+            <Setter Property="CornerRadius" Value="2,2,2,2"></Setter>
+        </Style>
+        <Style x:Key="PanelTitleBlock" TargetType="Grid">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,5,5,10"/>
+        </Style>
+        
+        <Style x:Key="Question" TargetType="TextBox">
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="White" BorderBrush="#FF7D8683" BorderThickness="0,0,0,1"/>
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" />
+                            <Label FontSize="20" Margin="-4,0,0,-4.5" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontFamily="Cambria"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+           
+            <Setter Property="Margin" Value="10,0,10,0"></Setter>
+            <Setter Property="AcceptsReturn" Value="True"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Cambria"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="Width" Value="232"></Setter>
+            <Setter Property="Height" Value="Auto"></Setter>
+        </Style>
+        <Style x:Key="Answer" TargetType="TextBox">
+            <Setter Property="IsEnabled" Value="False"></Setter>
+            <Setter Property="Margin" Value="10,0,10,5"></Setter>
+            <Setter Property="Foreground" Value="#FF716C6C"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Cambria"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="232"></Setter>
+        </Style>
+        <Style x:Key="OptionAnswer" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="White" BorderBrush="#FF7D8683" BorderThickness="0,0,0,1"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
+                            <Label Margin="2,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontFamily="Cambria"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="LightBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Margin" Value="0,0,0,5"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="FontFamily" Value="Cambria"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+            <Setter Property="BorderBrush" Value="white"></Setter>
+        </Style>
+        <Style x:Key="CircleButtonOptionAnswer" TargetType="Rectangle">
+            <Setter Property="IsEnabled" Value="False"></Setter>
+            <Setter Property="RadiusX" Value="50"></Setter>
+            <Setter Property="RadiusY" Value="50"></Setter>
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="Stroke" Value="#000000"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="SquareButtonOptionAnswer" TargetType="Rectangle">
+            <Setter Property="IsEnabled" Value="False"></Setter>
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="Stroke" Value="#000000"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="LabelOptionAnswer" TargetType="Label">
+            <Setter Property="FontSize" Value="17"></Setter>
+            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="AddOptionAnswer" TargetType="Button">
+            <Setter Property="Content" Value="Добавить"></Setter>
+            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+            <Setter Property="Width" Value="75"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="RemoveOptionAnswer" TargetType="Button">
+            <Setter Property="Content" Value="Удалить"></Setter>
+            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+            <Setter Property="Width" Value="75"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="ListQuestion" TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="SelectedIndex" Value="0"></Setter>
+            <Setter Property="Margin" Value="10,10,10,10"></Setter>
+        </Style>
+
+        <Style x:Key="AddButtonNewAnswer" TargetType="Border">
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="HorizontalAlignment"  Value="Right"></Setter>
+            <Setter Property="VerticalAlignment"  Value="Bottom"></Setter>
+            <Setter Property="Margin" Value="0,10,35,10"></Setter>
+            <Setter Property="CornerRadius" Value="10,10,10,10"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RemoveButtonAnswer" TargetType="Border">
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="HorizontalAlignment"  Value="Right"></Setter>
+            <Setter Property="VerticalAlignment"  Value="Bottom"></Setter>
+            <Setter Property="Margin" Value="0,10,60,10"></Setter>
+            <Setter Property="CornerRadius" Value="10,10,10,10"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="AddButtonTitleBlock" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment"  Value="Right"></Setter>
+            <Setter Property="VerticalAlignment"  Value="Bottom"></Setter>
+            <Setter Property="Margin" Value="0,0,10,10"></Setter>
+            <Setter Property="CornerRadius" Value="10,10,10,10"></Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="AddAnswerImage" TargetType="Image">
+            <Setter Property="HorizontalAlignment"  Value="Center"/>
+            <Setter Property="VerticalAlignment"  Value="Bottom"/>
+            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Circle-Add-03-16 (1).png"/>
+        </Style>
+        <Style x:Key="RemoveAnswerImage" TargetType="Image">
+            <Setter Property="HorizontalAlignment"  Value="Center"/>
+            <Setter Property="VerticalAlignment"  Value="Bottom"/>
+            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Circle-Remove-01-16.png"/>
+        </Style>
+        <Style x:Key="AddTitleBlockImage" TargetType="Image">
+            <Setter Property="HorizontalAlignment"  Value="Center"/>
+            <Setter Property="VerticalAlignment"  Value="Bottom"/>
+            <Setter Property="Stretch" Value="None"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Text-Decoration-15-16.png"/>
+        </Style>
+
+        <Style x:Key="InterviewButton" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Width" Value="450"/>
+        </Style>
+        
+        <Style x:Key="DeleteInterview" TargetType="Image">
+            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Close-26.png"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="26"/>
+        </Style>
+
+        <Style x:Key="TitleText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="0"/>
+        </Style>
+
+        <Style x:Key="DescriptionText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="0"/>
+        </Style>
+
+        <Style x:Key="ComboBoxQuestion" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="MinWidth" Value="250"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="1"/>
+        </Style>
+
+        <Style x:Key="ShortTextBoxQuestion" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="1"/>
+        </Style>
+
+        <Style x:Key="LongTextBoxQuestion" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        
+        <Style x:Key="RadioButtonQuestion" TargetType="RadioButton">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+        </Style>
+
+        <Style x:Key="TextVariant" TargetType="TextBlock">
+            <Setter Property="Margin" Value="25,3,0,0"/>
+        </Style>
+
+        <Style x:Key="HoursTextBox" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="MinWidth" Value="25"/>
+        </Style>
+        <Style x:Key="MinutesTextBox" TargetType="TextBox">
+            <Setter Property="Margin" Value="35,5,5,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="MinWidth" Value="25"/>
+        </Style>
+
+        <Style x:Key="DateTextBox" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="MinWidth" Value="25"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Text" Value="дд.мм.гг"/>
+        </Style>
+        
+        <Style x:Key="CalendarQuestion" TargetType="Calendar">
+            <Setter Property="Margin" Value="5,5,5,5"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Grid.Row" Value="1"/>
+        </Style>
+        
+    </Application.Resources>
+</Application>
