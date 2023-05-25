@@ -8,11 +8,11 @@ using System.Windows;
 
 namespace Creating_Inteview.questions
 {
-    public class MainBlock
+    public class TitleTextBlock
     {
         public Border border { get; }
 
-        public MainBlock(string titleText, string desc) 
+        public TitleTextBlock(string titleText, string desc)
         {
             border = new Border();
 
@@ -29,7 +29,7 @@ namespace Creating_Inteview.questions
             title.Text = titleText;
             description.Text = desc;
 
-            title.Style = (Style)title.FindResource("TitleText");
+            title.Style = (Style)title.FindResource("DescriptionText");
             description.Style = (Style)description.FindResource("DescriptionText");
             border.Style = (Style)border.FindResource("TitleBlock");
 

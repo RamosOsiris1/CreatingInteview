@@ -15,8 +15,10 @@
             </Grid.ColumnDefinitions>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Width="505" x:Name="InterviewBody"/>
-
+            <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Сохранить ответ" Width="191" Background="#FF31BB40" Foreground="White"/>
         </Grid>
+
+
     </ScrollViewer>
 
 </Window>

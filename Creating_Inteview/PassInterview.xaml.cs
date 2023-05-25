@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Creating_Inteview
 {
@@ -29,7 +30,7 @@ namespace Creating_Inteview
                 switch (interview[i].Question_Index)
                 {
                     case -1:
-                        CreateMainBlock();
+                        CreateTitleTextBlock();
                         break;
                     case 0:
                         CreateShortQuestion();
@@ -60,6 +61,20 @@ namespace Creating_Inteview
                         break;
                 }
             }
+
+            CreateButtonSaveAnswer();
+        }
+
+        private void CreateButtonSaveAnswer()
+        {
+            Button button = new Button();
+
+            button.Style = (Style)button.FindResource("SaveButtonAnswer");
+
+            InterviewBody.Children.Add(button);
+            InterviewBody.RowDefinitions.Add(new RowDefinition());
+
+            Grid.SetRow(button, InterviewBody.RowDefinitions.Count - 1);
         }
 
         private void CreateMainBlock()
@@ -68,6 +83,14 @@ namespace Creating_Inteview
 
             AddBlock(mainBlock.border);
         }
+
+        private void CreateTitleTextBlock()
+        {
+            TitleTextBlock titleText = new TitleTextBlock(quest.Title_Text, quest.Description_Text);
+
+            AddBlock(titleText.border);
+        }
+
         private void CreateComboBoxQuestion()
         {
             ComboBoxQuestion question = new ComboBoxQuestion(quest.Question_Text, quest.LeftOptions.ToArray());

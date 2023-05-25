@@ -330,6 +330,8 @@ namespace Creating_Inteview
 
         private void SelectFigure(Grid grid)
         {
+            style = "CircleButtonOptionAnswer";
+
             if (comboBox.SelectedIndex == 2 || comboBox.SelectedIndex == 5) style = "CircleButtonOptionAnswer";
             else if (comboBox.SelectedIndex == 3 || comboBox.SelectedIndex == 6) style = "SquareButtonOptionAnswer";
 

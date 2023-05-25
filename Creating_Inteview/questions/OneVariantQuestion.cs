@@ -35,8 +35,6 @@ namespace Creating_Inteview.questions
         { 
             int count = variants.Length;
 
-            Console.WriteLine(variants[0]);
-
             for (int i = 1; i < count + 1; i++)
             {
                 TextBlock nameVariant = new TextBlock();

@@ -96,6 +96,7 @@
     <Compile Include="questions\OneVariantQuestion.cs" />
     <Compile Include="questions\ShortQuestion.cs" />
     <Compile Include="questions\TimeQuestion.cs" />
+    <Compile Include="questions\TitleTextBlock.cs" />
     <Compile Include="SelectInterview.xaml.cs">
       <DependentUpon>SelectInterview.xaml</DependentUpon>
     </Compile>

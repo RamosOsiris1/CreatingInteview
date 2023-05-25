@@ -8,6 +8,7 @@ using Image = System.Windows.Controls.Image;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using System.Collections;
 
 
 namespace Creating_Inteview
@@ -58,6 +59,8 @@ namespace Creating_Inteview
             addNewAnswear.MouseDown += AddNewAnswer_Button_Click;
             removeAnswear.MouseDown += RemoveAnswer_Button_Click;
             addTitleBlock.MouseDown += AddTitleBlock_Block_Click;
+
+            if (questionText == "") comboBox.SelectedIndex = 0;
 
             comboBox.SelectionChanged += ComboBox_SelectionChanged;
 
@@ -358,26 +361,43 @@ namespace Creating_Inteview
                 string fileName = "user.json";
 
                 bool flag = true;
-
+                
                 if (File.Exists(fileName) && File.ReadAllBytes(fileName).Length != 0) bigJson = JsonSerializer.Deserialize<List<List<Data>>>(File.ReadAllText(fileName, Encoding.Default), options);
 
-                for (int i = 0; i < bigJson.Count; i++)
+
+                if (questions.Count <= 1) { flag = false; MessageBox.Show("Добавьте хотя бы один вопрос!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); }
+                else
                 {
-                    if (bigJson[i][0].Title_Text == name)
+                    for (int i = 0; i < questions.Count; i++)
                     {
-                        if (MessageBox.Show("Такой опрос уже существует. Заменить?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        string quest = questions[i].Question_Text;
+                        string title = questions[i].Title_Text;
+                        int index = questions[i].ComboBox_Index;
+
+                        if (quest == "" && title == "") { flag = false; MessageBox.Show("Не все поля заполнены!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); break; }
+                    }
+                    if (flag)
+                    {
+                        for (int i = 0; i < bigJson.Count; i++)
                         {
-                            bigJson.RemoveAt(i);
+                            if (bigJson[i][0].Title_Text == name)
+                            {
+                                if (MessageBox.Show("Такой опрос уже существует. Заменить?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                                {
+                                    bigJson.RemoveAt(i);
 
-                            string bigJSON = JsonSerializer.Serialize(bigJson, options);
+                                    string bigJSON = JsonSerializer.Serialize(bigJson, options);
 
-                            byte[] bt = Encoding.Default.GetBytes(bigJSON);
+                                    byte[] bt = Encoding.Default.GetBytes(bigJSON);
 
-                            File.WriteAllBytes(fileName, bt);
+                                    File.WriteAllBytes(fileName, bt);
+                                }
+                                else { flag = false; break; }
+                            }
                         }
-                        else { flag = false; break; }
                     }
                 }
+
                 if (flag)
                 {
                     using (FileStream fs = new FileStream(fileName, FileMode.Create))
@@ -389,6 +409,9 @@ namespace Creating_Inteview
 
                         for (int i = 0; i < questions.Count; i++)
                         {
+                            optionsLeft = new List<string>();
+                            optionsRight = new List<string>();
+
                             int index = questions[i].ComboBox_Index;
                             string title = questions[i].Title_Text;
                             string desc = questions[i].Description_Text;
@@ -397,29 +420,25 @@ namespace Creating_Inteview
                             Grid LeftOptions = questions[i].Get_LeftList;
                             Grid RightOptions = questions[i].Get_RightList;
 
-                            if (questions[i].Get_LeftList.Children.Count != 0)
+                            if (questions[i].Get_LeftList.Children.Count != 0 || questions[i].Get_RightList.Children.Count != 0)
                             {
                                 for (int j = 1; j < questions[i].Get_LeftList.Children.Count; j += 2)
                                 {
                                     TextBox text1 = (TextBox)LeftOptions.Children[j];
-                                    optionsLeft.Add(text1.Text);
+                                    if (text1.Text != "") optionsLeft.Add(text1.Text);
                                 }
-                            }
-
-                            if (questions[i].Get_RightList.Children.Count != 0)
-                            {
                                 for (int j = 1; j < questions[i].Get_RightList.Children.Count; j += 2)
                                 {
                                     TextBox text2 = (TextBox)RightOptions.Children[j];
-                                    optionsRight.Add(text2.Text);
+                                    if (text2.Text != "") optionsLeft.Add(text2.Text);
                                 }
                             }
-
-                            if ((title == "" && index == -1 && quest == "")) continue;
 
                             Data data = new Data(index, title, desc, quest, optionsLeft, optionsRight);
 
                             dataList.Add(data);
+
+                            Console.WriteLine(i);
                         }
 
                         bigJson.Add(dataList);
@@ -429,12 +448,11 @@ namespace Creating_Inteview
                         buffer = Encoding.Default.GetBytes(json);
 
                         await fs.WriteAsync(buffer, 0, buffer.Length);
+
                     }
                 }
             }
             else MessageBox.Show("Дайте название опроснику!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
-            
-                
         }
         private void ExitApp_Button_Click(object sender, RoutedEventArgs e)
         {

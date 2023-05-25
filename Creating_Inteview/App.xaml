@@ -367,6 +367,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="SaveButtonAnswer" TargetType="Button">
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Content" Value="Сохранить ответ"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Background" Value="#FF31BB40"/>
+            <Setter Property="Foreground" Value="white"/>
+        </Style>
         
     </Application.Resources>
 </Application>
