@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Creating_Inteview"
         mc:Ignorable="d"
-        Title="PassInterview" Height="768" Width="1024" Closed="WindowClosed">
+        Title="Опрос" Height="768" Width="1024" Closed="WindowClosed" Icon="/IconWindow.png" >
     <ScrollViewer>
         <Grid>
             <Grid.ColumnDefinitions>

@@ -23,7 +23,10 @@ namespace Creating_Inteview
     public partial class SelectInterview : Window
     {
         private List<List<Data>> bigJson;
+        private List<List<Data>> CopybigJson;
         private PassInterview passInterview;
+
+        private bool flag = true;
 
         public MainWindow main;
         public SelectInterview()
@@ -45,6 +48,7 @@ namespace Creating_Inteview
             options.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 
             bigJson = JsonSerializer.Deserialize<List<List<Data>>>(File.ReadAllText(fileName, Encoding.Default), options);
+            CopybigJson = JsonSerializer.Deserialize<List<List<Data>>>(File.ReadAllText(fileName, Encoding.Default), options);
         }
 
         private void ShowInterviews()
@@ -83,20 +87,70 @@ namespace Creating_Inteview
         private void OpenInterview_Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
+            
             int index = int.Parse(button.Tag.ToString());
 
             passInterview = new PassInterview();
+            passInterview.main = main;
+
             passInterview.LoadInterview(bigJson[index]);
 
             passInterview.Show();
-            passInterview.main = main;
+
+            flag = false;
 
             Close();
         }
 
         private void WindowClosed(object sender, EventArgs e)
         {
-            main.IsEnabled= true;
+            if (flag) main.IsEnabled= true;
+        }
+
+        private void FindFile_Click(object sender, RoutedEventArgs e)
+        {
+            List<Data> data;
+
+            List<List<Data>> copy = new List<List<Data>>();
+
+            bigJson = CopybigJson;
+
+            if (field.Text != "")
+            {
+                for (int i = 0; i < bigJson.Count; i++)
+                {
+                    data = bigJson[i];
+
+                    if (data[0].Title_Text.Contains(field.Text)) copy.Add(bigJson[i]);
+                }
+
+                bigJson = copy;
+
+                HideButtons();
+                ShowButtons();
+            }
+            else
+            {
+                HideButtons();
+                ShowButtons();
+            }
+        }
+
+        private void ShowButtons()
+        {
+            List<Data> data;
+
+            for (int i = 0; i < bigJson.Count; i++)
+            {
+                data = bigJson[i];
+                SpawnInterviews(data[0].Title_Text, i);
+            }
+        }
+
+        private void HideButtons()
+        {
+            list.Children.Clear();
+            list.RowDefinitions.Clear();
         }
     }
 }

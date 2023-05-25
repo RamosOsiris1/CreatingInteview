@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Creating_Inteview"
         mc:Ignorable="d"
-        Height="500" Width="700" Background="white" ResizeMode="NoResize" Closed="Closed_Click">
+        Height="500" Width="700" Background="white" ResizeMode="NoResize" Closed="Closed_Click" Title="Поиск интервью" Icon="/IconWindow.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="111*"/>

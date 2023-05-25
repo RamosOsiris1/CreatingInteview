@@ -242,7 +242,7 @@
             <Setter Property="Stretch" Value="None"/>
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Circle-Add-03-16 (1).png"/>
+            <Setter Property="Source" Value="resource/Circle-Add.png"/>
         </Style>
         <Style x:Key="RemoveAnswerImage" TargetType="Image">
             <Setter Property="HorizontalAlignment"  Value="Center"/>
@@ -250,7 +250,7 @@
             <Setter Property="Stretch" Value="None"/>
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Circle-Remove-01-16.png"/>
+            <Setter Property="Source" Value="resource/Circle-Remove.png"/>
         </Style>
         <Style x:Key="AddTitleBlockImage" TargetType="Image">
             <Setter Property="HorizontalAlignment"  Value="Center"/>
@@ -258,7 +258,7 @@
             <Setter Property="Stretch" Value="None"/>
             <Setter Property="Width" Value="Auto"/>
             <Setter Property="Height" Value="Auto"/>
-            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Text-Decoration-15-16.png"/>
+            <Setter Property="Source" Value="resource/Text-Decoration.png"/>
         </Style>
 
         <Style x:Key="InterviewButton" TargetType="Button">
@@ -269,7 +269,7 @@
         </Style>
         
         <Style x:Key="DeleteInterview" TargetType="Image">
-            <Setter Property="Source" Value="E:/Users/zxc/Desktop/картинки/Close-26.png"/>
+            <Setter Property="Source" Value="resource/Close.png"/>
             <Setter Property="Grid.Column" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -358,6 +358,14 @@
             <Setter Property="Margin" Value="5,5,5,5"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="Grid.Row" Value="1"/>
+        </Style>
+
+        <Style x:Key="MouseEnterInBlock" TargetType="Border">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#EEEEEE"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         
     </Application.Resources>

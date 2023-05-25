@@ -169,5 +169,29 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\Circle-Add.png" />
+    <Resource Include="resource\Circle-Remove.png" />
+    <Resource Include="resource\Close.png" />
+    <Resource Include="resource\Text-Decoration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\Document-Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Document-Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\Appointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Appointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\IconWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IconWindow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

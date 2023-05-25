@@ -15,7 +15,6 @@ namespace Creating_Inteview
         public PassInterview()
         {
             InitializeComponent();
-            main.IsEnabled = false;
         }
 
         public void LoadInterview(List<Data> interview)

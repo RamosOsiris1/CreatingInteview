@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Creating_Inteview
 {
@@ -9,7 +10,7 @@ namespace Creating_Inteview
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NewInterview_Click(object sender, RoutedEventArgs e)
         {
             IsEnabled = false;
 
@@ -18,7 +19,7 @@ namespace Creating_Inteview
             createInterview.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void PassInterview_Click(object sender, RoutedEventArgs e)
         {
             IsEnabled = false;
 

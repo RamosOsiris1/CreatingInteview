@@ -5,9 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Creating_Inteview"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="265">
+        Title="Опросник" Height="200" Width="265" ResizeMode="NoResize" Icon="/IconWindow.png" >
     <Grid Width="251">
-        <Button Content="Создать опрос" HorizontalAlignment="Left"  VerticalAlignment="Center" Height="100" Width="100" Click="Button_Click" Margin="10,0,0,0" />
-        <Button Content="Пройти опрос" HorizontalAlignment="Left" VerticalAlignment="Center" Height="100" Width="100" Click="Button_Click_1" Margin="140,0,0,0"  />
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Style="{StaticResource MouseEnterInBlock}" BorderThickness="1,1,1,1" BorderBrush="Gray" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid MouseDown="NewInterview_Click" Margin="5,5,5,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image RenderTransformOrigin="0.5,0.5" Stretch="None" Source="/Document-Add.png" Grid.Row="0"/>
+                <Label Content="Создать опрос" Grid.Row="1"/>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource MouseEnterInBlock}" BorderThickness="1,1,1,1" BorderBrush="Gray" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" MouseDown="PassInterview_Click">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="None" RenderTransformOrigin="0.5,0.5" Source="/Appointment.png" Grid.Row="0"/>
+                <Label Content="Пройти опрос" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="90" Grid.Row="1"/>
+            </Grid>
+        </Border>
+
     </Grid>
 </Window>
