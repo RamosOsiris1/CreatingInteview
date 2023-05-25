@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="questions\CalendarQuestion.cs" />
+    <Compile Include="questions\GridOneVariantQuestion.cs" />
     <Compile Include="questions\GridManyVariantQuestion.cs" />
     <Compile Include="questions\LongQuestion.cs" />
     <Compile Include="questions\MainBlock.cs" />
@@ -95,6 +96,9 @@
     <Compile Include="questions\OneVariantQuestion.cs" />
     <Compile Include="questions\ShortQuestion.cs" />
     <Compile Include="questions\TimeQuestion.cs" />
+    <Compile Include="SelectInterview.xaml.cs">
+      <DependentUpon>SelectInterview.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateInterview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +131,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PassInterview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectInterview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

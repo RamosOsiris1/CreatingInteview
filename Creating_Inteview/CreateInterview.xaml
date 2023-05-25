@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Creating_Inteview" xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="CreateInterview" Height="768" Width="1024" Background="white" ResizeMode="NoResize">
+        Title="CreateInterview" Height="768" Width="1024" Background="white" ResizeMode="NoResize" Closed="WindowClosed">
     <Grid>
         
         <Menu Height="Auto" VerticalAlignment="Top" Panel.ZIndex="1" Margin="0,0,0,0">

@@ -12,7 +12,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
 
-        public ShortQuestion()
+        public ShortQuestion(string textQuestion)
         {
             border = new Border();
             Grid grid = new Grid();
@@ -24,6 +24,8 @@ namespace Creating_Inteview.questions
 
             TextBlock textBlock = new TextBlock();
             TextBox textBox = new TextBox();
+
+            textBlock.Text = textQuestion;
 
             grid.Children.Add(textBlock);
             grid.Children.Add(textBox);

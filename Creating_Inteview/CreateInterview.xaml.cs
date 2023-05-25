@@ -1,31 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 using Image = System.Windows.Controls.Image;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using System.Windows.Markup;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text.RegularExpressions;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
-using System.ComponentModel;
-using System.Windows.Media.Media3D;
+
 
 namespace Creating_Inteview
 {
@@ -36,6 +19,8 @@ namespace Creating_Inteview
         private List<Question> questions = new List<Question>();
 
         private bool isLoaded = true;
+
+        public MainWindow main;
 
         public CreateInterview()
         {
@@ -370,9 +355,11 @@ namespace Creating_Inteview
 
                 options.Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic);
 
-                string fileName = "E:/Users/zxc/Desktop/Новая папка (2)/user.json";
+                string fileName = "user.json";
 
-                if (File.ReadAllBytes(fileName).Length != 0) bigJson = JsonSerializer.Deserialize<List<List<Data>>>(File.ReadAllText(fileName, Encoding.Default), options);
+                bool flag = true;
+
+                if (File.Exists(fileName) && File.ReadAllBytes(fileName).Length != 0) bigJson = JsonSerializer.Deserialize<List<List<Data>>>(File.ReadAllText(fileName, Encoding.Default), options);
 
                 for (int i = 0; i < bigJson.Count; i++)
                 {
@@ -388,64 +375,70 @@ namespace Creating_Inteview
 
                             File.WriteAllBytes(fileName, bt);
                         }
-                        else break;
+                        else { flag = false; break; }
                     }
                 }
-                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                if (flag)
                 {
-                    byte[] buffer;
-
-                    List<string> optionsLeft = new List<string>();
-                    List<string> optionsRight = new List<string>();
-
-                    for (int i = 0; i < questions.Count; i++)
+                    using (FileStream fs = new FileStream(fileName, FileMode.Create))
                     {
-                        int index = questions[i].ComboBox_Index;
-                        string title = questions[i].Title_Text;
-                        string desc = questions[i].Description_Text;
-                        string quest = questions[i].Question_Text;
+                        byte[] buffer;
 
-                        Grid LeftOptions = questions[i].Get_LeftList;
-                        Grid RightOptions = questions[i].Get_RightList;
+                        List<string> optionsLeft = new List<string>();
+                        List<string> optionsRight = new List<string>();
 
-                        if (questions[i].Get_LeftList.Children.Count != 0)
+                        for (int i = 0; i < questions.Count; i++)
                         {
-                            for (int j = 1; j < questions[i].Get_LeftList.Children.Count; j += 2)
+                            int index = questions[i].ComboBox_Index;
+                            string title = questions[i].Title_Text;
+                            string desc = questions[i].Description_Text;
+                            string quest = questions[i].Question_Text;
+
+                            Grid LeftOptions = questions[i].Get_LeftList;
+                            Grid RightOptions = questions[i].Get_RightList;
+
+                            if (questions[i].Get_LeftList.Children.Count != 0)
                             {
-                                TextBox text1 = (TextBox)LeftOptions.Children[j];
-                                optionsLeft.Add(text1.Text);
+                                for (int j = 1; j < questions[i].Get_LeftList.Children.Count; j += 2)
+                                {
+                                    TextBox text1 = (TextBox)LeftOptions.Children[j];
+                                    optionsLeft.Add(text1.Text);
+                                }
                             }
-                        }
-                        
-                        if (questions[i].Get_RightList.Children.Count != 0)
-                        {
-                            for (int j = 1; j < questions[i].Get_RightList.Children.Count; j += 2)
+
+                            if (questions[i].Get_RightList.Children.Count != 0)
                             {
-                                TextBox text2 = (TextBox)RightOptions.Children[j];
-                                optionsRight.Add(text2.Text);
+                                for (int j = 1; j < questions[i].Get_RightList.Children.Count; j += 2)
+                                {
+                                    TextBox text2 = (TextBox)RightOptions.Children[j];
+                                    optionsRight.Add(text2.Text);
+                                }
                             }
+
+                            if ((title == "" && index == -1 && quest == "")) continue;
+
+                            Data data = new Data(index, title, desc, quest, optionsLeft, optionsRight);
+
+                            dataList.Add(data);
                         }
 
-                        if ((title == "" && index == -1 && quest == "")) continue;
+                        bigJson.Add(dataList);
 
-                        Data data = new Data(index, title, desc, quest, optionsLeft, optionsRight);
+                        string json = JsonSerializer.Serialize(bigJson, options);
 
-                        dataList.Add(data);
+                        buffer = Encoding.Default.GetBytes(json);
+
+                        await fs.WriteAsync(buffer, 0, buffer.Length);
                     }
-
-                    bigJson.Add(dataList);
-
-                    string json = JsonSerializer.Serialize(bigJson, options);
-
-                    buffer = Encoding.Default.GetBytes(json);
-
-                    await fs.WriteAsync(buffer, 0, buffer.Length);
                 }
             }
             else MessageBox.Show("Дайте название опроснику!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+            
+                
         }
         private void ExitApp_Button_Click(object sender, RoutedEventArgs e)
         {
+            main.IsEnabled = true;
             Close();
         }
 
@@ -507,6 +500,11 @@ namespace Creating_Inteview
             isLoaded = false;
 
             AddBorders(borders, 1);
+        }
+
+        private void WindowClosed(object sender, EventArgs e)
+        {
+            main.IsEnabled = true;
         }
     }
 }

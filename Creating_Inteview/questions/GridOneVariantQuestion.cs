@@ -5,16 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
-using System.Data.Common;
 
 namespace Creating_Inteview.questions
 {
-    public class GridManyVariantQuestion
+    public class GridOneVariantQuestion
     {
         public Border border { get; }
         Grid grid;
         Grid gridAnswers;
-        public GridManyVariantQuestion(string textQuestion)
+        public GridOneVariantQuestion(string textQuestion)
         {
             border = new Border();
             grid = new Grid();
@@ -76,12 +75,13 @@ namespace Creating_Inteview.questions
             {
                 for (int j = 1; j < countColumn + 1; j++)
                 {
-                    CheckBox checkBox = new CheckBox();
+                    RadioButton radioButton = new RadioButton();
+                    radioButton.GroupName = $"{i}";
 
-                    gridAnswers.Children.Add(checkBox);
+                    gridAnswers.Children.Add(radioButton);
 
-                    Grid.SetColumn(checkBox, j);
-                    Grid.SetRow(checkBox, i);
+                    Grid.SetColumn(radioButton, j);
+                    Grid.SetRow(radioButton, i);
                 }
             }
         }

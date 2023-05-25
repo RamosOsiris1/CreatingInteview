@@ -12,7 +12,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
         Grid grid;
-        public OneVariantQuestion()
+        public OneVariantQuestion(string textQuestion)
         {
             border = new Border();
             grid = new Grid();
@@ -23,18 +23,26 @@ namespace Creating_Inteview.questions
 
             TextBlock textBlock = new TextBlock();
 
+            textBlock.Text = textQuestion;
+
             grid.Children.Add(textBlock);
 
             border.Style = (Style)grid.FindResource("TitleBlock");
             textBlock.Style = (Style)textBlock.FindResource("DescriptionText");
         }
 
-        public void AddVariant(int count)
+        public void AddVariant(string[] variants)
         { 
+            int count = variants.Length;
+
+            Console.WriteLine(variants[0]);
+
             for (int i = 1; i < count + 1; i++)
             {
                 TextBlock nameVariant = new TextBlock();
                 RadioButton radioButton = new RadioButton();
+
+                nameVariant.Text = variants[i - 1];
 
                 nameVariant.Style = (Style)nameVariant.FindResource("TextVariant");
                 radioButton.Style = (Style)radioButton.FindResource("RadioButtonQuestion");

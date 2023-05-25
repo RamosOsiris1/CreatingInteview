@@ -12,7 +12,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
 
-        public MainBlock() 
+        public MainBlock(string titleText, string desc) 
         {
             border = new Border();
 
@@ -25,6 +25,9 @@ namespace Creating_Inteview.questions
 
             TextBlock title = new TextBlock();
             TextBlock description = new TextBlock();
+
+            title.Text = titleText;
+            description.Text = desc;
 
             title.Style = (Style)title.FindResource("TitleText");
             description.Style = (Style)description.FindResource("DescriptionText");

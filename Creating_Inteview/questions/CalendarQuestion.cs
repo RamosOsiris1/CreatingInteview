@@ -11,6 +11,7 @@ namespace Creating_Inteview.questions
     public class CalendarQuestion
     {
         public Border border { get; }
+        public Calendar calendar { get; }
 
         public CalendarQuestion()
         {
@@ -24,7 +25,7 @@ namespace Creating_Inteview.questions
 
             TextBlock textBlock = new TextBlock();
             TextBox text = new TextBox();
-            Calendar calendar = new Calendar();
+            calendar = new Calendar();
 
             grid.Children.Add(textBlock);
             grid.Children.Add(text);

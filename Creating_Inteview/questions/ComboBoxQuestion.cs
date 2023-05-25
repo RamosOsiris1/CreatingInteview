@@ -13,7 +13,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
 
-        public ComboBoxQuestion() 
+        public ComboBoxQuestion(string textQuestion, string[] variants) 
         { 
             border = new Border();
             Grid grid = new Grid();
@@ -25,6 +25,9 @@ namespace Creating_Inteview.questions
 
             TextBlock textBlock = new TextBlock();
             ComboBox comboBox = new ComboBox();
+
+            textBlock.Text = textQuestion;
+            comboBox.ItemsSource = variants;
 
             grid.Children.Add(textBlock);
             grid.Children.Add(comboBox);

@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Creating_Inteview
 {
@@ -20,7 +7,6 @@ namespace Creating_Inteview
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -28,6 +14,7 @@ namespace Creating_Inteview
             IsEnabled = false;
 
             CreateInterview createInterview = new CreateInterview();
+            createInterview.main = this;
             createInterview.Show();
         }
 
@@ -35,8 +22,9 @@ namespace Creating_Inteview
         {
             IsEnabled = false;
 
-            PassInterview passInterview = new PassInterview();
-            passInterview.Show();
+            SelectInterview selectInterview = new SelectInterview();
+            selectInterview.main = this;
+            selectInterview.Show();
         }
     }
 }

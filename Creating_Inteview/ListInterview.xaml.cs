@@ -22,9 +22,6 @@ using System.Windows.Shapes;
 
 namespace Creating_Inteview
 {
-    /// <summary>
-    /// Логика взаимодействия для ListInterview.xaml
-    /// </summary>
     public partial class ListInterview : Window
     {
         List<List<Data>> bigJson;
@@ -46,7 +43,7 @@ namespace Creating_Inteview
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
 
-            string fileName = "E:/Users/zxc/Desktop/Новая папка (2)/user.json";
+            string fileName = "user.json";
 
             if (File.ReadAllBytes(fileName).Length != 0)
             {
@@ -158,9 +155,9 @@ namespace Creating_Inteview
         {
             Image image = (Image)sender;
 
-            int index = list.Children.IndexOf(image);
+            Button btn = (Button)list.Children[list.Children.IndexOf(image) - 1];
 
-            bigJson.RemoveAt(index - 1);
+            bigJson.RemoveAt(int.Parse(btn.Tag.ToString()));
 
             HideButtons();
             ShowButtons();
@@ -168,10 +165,9 @@ namespace Creating_Inteview
             SaveFile();
         }
 
-
         async private void SaveFile()
         {
-            string fileName = "E:/Users/zxc/Desktop/Новая папка (2)/user.json";
+            string fileName = "user.json";
 
             if (bigJson.Count != 0)
             {

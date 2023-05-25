@@ -11,6 +11,8 @@ namespace Creating_Inteview.questions
     public class TimeQuestion
     {
         public Border border { get; }
+        public TextBox hours { get; }
+        public TextBox minutes { get; }
 
         public TimeQuestion()
         {
@@ -23,8 +25,8 @@ namespace Creating_Inteview.questions
             grid.RowDefinitions.Add(new RowDefinition());
 
             TextBlock textBlock = new TextBlock();
-            TextBox hours = new TextBox();
-            TextBox minutes = new TextBox();
+            hours = new TextBox();
+            minutes = new TextBox();
 
             grid.Children.Add(textBlock);
             grid.Children.Add(hours);
