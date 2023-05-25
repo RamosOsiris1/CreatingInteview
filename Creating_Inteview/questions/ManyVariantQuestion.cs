@@ -11,7 +11,7 @@ namespace Creating_Inteview.questions
     public class ManyVariantQuestion
     {
         public Border border { get; }
-        Grid grid;
+        public Grid grid;
         public ManyVariantQuestion(string textQuestion)
         {
             border = new Border();
@@ -27,7 +27,7 @@ namespace Creating_Inteview.questions
 
             grid.Children.Add(textBlock);
 
-            border.Style = (Style)grid.FindResource("TitleBlock");
+            border.Style = (Style)border.FindResource("TitleBlock");
             textBlock.Style = (Style)textBlock.FindResource("DescriptionText");
         }
 

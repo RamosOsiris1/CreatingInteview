@@ -11,7 +11,7 @@ namespace Creating_Inteview.questions
     public class OneVariantQuestion
     {
         public Border border { get; }
-        Grid grid;
+        public Grid grid;
         public OneVariantQuestion(string textQuestion)
         {
             border = new Border();

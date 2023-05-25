@@ -372,9 +372,24 @@ namespace Creating_Inteview
                     {
                         string quest = questions[i].Question_Text;
                         string title = questions[i].Title_Text;
-                        int index = questions[i].ComboBox_Index;
 
                         if (quest == "" && title == "") { flag = false; MessageBox.Show("Не все поля заполнены!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); break; }
+                    }
+                    for (int i = 0; i < questions.Count; i++)
+                    {
+                        string quest = questions[i].Question_Text;
+                        int index = questions[i].ComboBox_Index;
+
+                        if (index == 5 || index == 6)
+                        {
+                            Grid LeftOptions = questions[i].Get_LeftList;
+                            Grid RightOptions = questions[i].Get_RightList;
+
+                            TextBox textBox1 = (TextBox)LeftOptions.Children[1];
+                            TextBox textBox2 = (TextBox)RightOptions.Children[1];
+
+                            if (textBox1.Text == "" || textBox2.Text == "") { flag = false; MessageBox.Show("Не все поля заполнены!", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); break; }
+                        }
                     }
                     if (flag)
                     {
@@ -430,15 +445,13 @@ namespace Creating_Inteview
                                 for (int j = 1; j < questions[i].Get_RightList.Children.Count; j += 2)
                                 {
                                     TextBox text2 = (TextBox)RightOptions.Children[j];
-                                    if (text2.Text != "") optionsLeft.Add(text2.Text);
+                                    if (text2.Text != "") optionsRight.Add(text2.Text);
                                 }
                             }
 
                             Data data = new Data(index, title, desc, quest, optionsLeft, optionsRight);
 
                             dataList.Add(data);
-
-                            Console.WriteLine(i);
                         }
 
                         bigJson.Add(dataList);

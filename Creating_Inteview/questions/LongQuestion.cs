@@ -11,6 +11,7 @@ namespace Creating_Inteview.questions
     public class LongQuestion
     {
         public Border border { get; }
+        public TextBox textBox { get; }
 
         public LongQuestion(string textQuestion)
         {
@@ -23,7 +24,7 @@ namespace Creating_Inteview.questions
             grid.RowDefinitions.Add(new RowDefinition());
 
             TextBlock textBlock = new TextBlock();
-            TextBox textBox = new TextBox();
+            textBox = new TextBox();
 
             textBlock.Text = textQuestion;
 

@@ -12,7 +12,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
         Grid grid;
-        Grid gridAnswers;
+        public Grid gridAnswers;
         public GridOneVariantQuestion(string textQuestion)
         {
             border = new Border();
@@ -76,6 +76,7 @@ namespace Creating_Inteview.questions
                 for (int j = 1; j < countColumn + 1; j++)
                 {
                     RadioButton radioButton = new RadioButton();
+
                     radioButton.GroupName = $"{i}";
 
                     gridAnswers.Children.Add(radioButton);

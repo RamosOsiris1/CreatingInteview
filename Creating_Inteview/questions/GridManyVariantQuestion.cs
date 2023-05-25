@@ -13,7 +13,7 @@ namespace Creating_Inteview.questions
     {
         public Border border { get; }
         Grid grid;
-        Grid gridAnswers;
+        public Grid gridAnswers;
         public GridManyVariantQuestion(string textQuestion)
         {
             border = new Border();
